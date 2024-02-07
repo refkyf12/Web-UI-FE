@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from '@mui/material/Button'
+import AddIcon from '@mui/icons-material/Add';
+import { Sidebar } from './components/Sidebar';
+import { Rightbar } from './components/Rightbar';
+import { Navbar } from './components/Navbar';
+import { ResumeTable } from './components/ResumeTable';
+import { Box, Container, Stack } from '@mui/material';
+import { useState } from 'react';
+import { Footer } from './components/Footer';
 
-function App() {
+function Resume() {
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    //Navbar
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+    }}>
+      <Navbar onSidebarToggle={handleSidebarToggle}></Navbar>
+      <Stack direction={'row'} spacing={2} justifyContent={'flex-start'}>
+        <Sidebar isOpen={isSidebarOpen} ></Sidebar>
+        <ResumeTable></ResumeTable>
+      </Stack>
+      <Footer></Footer>
+    </Box>
   );
 }
 
-export default App;
+export default Resume;
